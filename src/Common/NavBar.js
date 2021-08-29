@@ -9,9 +9,9 @@ const NavBar = ({ history }) => (
   <div style={{ backgroundColor: "#faf8f3" }} className="pt-3 px-3 mt-5 ">
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid px-5">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           befriend
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -46,18 +46,18 @@ const NavBar = ({ history }) => (
               </a>
             </li>
           </ul>
-          <form className="d-flex">
-            <button
+          <div className="d-flex">
+            <Link
               style={{ borderColor: "#faf8f3" }}
               className="btn btn-outline-dark mx-3"
-              type="submit"
+              to="/signIn"
             >
               Sign UP
-            </button>
-            <button className="btn btn-outline-dark" type="submit">
+            </Link>
+            <Link className="btn btn-outline-dark" to="/signIn">
               Login
-            </button>
-          </form>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
