@@ -4,6 +4,7 @@ import LoginScreen from "../Auth/LoginScreen";
 // import SignUp from "../../src/user/SignUp";
 // import SignIn from "../../src/user/SignIn";
 import NavBar from "../Common/NavBar";
+import AddCommunityScreen from "../Screens/Community/AddCommunityScreen";
 // import ProfileScreen from "../user/ProfileScreen";
 // import UsersScreen from "../user/UsersScreen";
 // import EditScreen from "../user/EditScreen";
@@ -13,8 +14,8 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={Home}></Route>
       <Route exact path="/signIn" component={LoginScreen}></Route>
-      {/* <Route exact path="/signup" component={SignUp}></Route>
-      <Route exact path="/signin" component={SignIn}></Route>
+      <Route exact path="/community" component={AddCommunityScreen}></Route>
+      {/*<Route exact path="/signin" component={SignIn}></Route>
       <Route exact path="/users" component={UsersScreen}></Route>
       <Route exact path="/user/edit/:userId" component={EditScreen}></Route> */}
     </Switch>

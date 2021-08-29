@@ -1,7 +1,10 @@
 import { Link, withRouter } from "react-router-dom";
 import { isAuthenticated } from "../Services/auth/AuthService";
 import { signOut } from "../Services/auth/AuthService";
-
+const isActive = (history, path) => {
+  if (history.location.pathname === path) return true;
+  return false;
+};
 const NavBar = ({ history }) => {
   const signOutUser = () => {
     signOut(() => history.push("/"));
@@ -30,14 +33,27 @@ const NavBar = ({ history }) => {
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0">
               <li className="nav-item mx-4">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link
+                  className={
+                    isActive(history, "/") ? "nav-link active" : "nav-link"
+                  }
+                  aria-current="page"
+                  to="/"
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-4">
-                <a className="nav-link" href="#">
+                <Link
+                  className={
+                    isActive(history, "/community")
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  to="/community"
+                >
                   Community
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-4">
                 <a className="nav-link" href="#">
