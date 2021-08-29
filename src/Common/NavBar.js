@@ -1,4 +1,5 @@
 import { Link, withRouter } from "react-router-dom";
+import { isAuthenticated } from "../Services/auth/AuthService";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) return true;
@@ -47,16 +48,24 @@ const NavBar = ({ history }) => (
             </li>
           </ul>
           <div className="d-flex">
-            <Link
-              style={{ borderColor: "#faf8f3" }}
-              className="btn btn-outline-dark mx-3"
-              to="/signIn"
-            >
-              Sign UP
-            </Link>
-            <Link className="btn btn-outline-dark" to="/signIn">
-              Login
-            </Link>
+            {(!isAuthenticated() && (
+              <div>
+                <Link
+                  style={{ borderColor: "#faf8f3" }}
+                  className="btn btn-outline-dark mx-3"
+                  to="/signIn"
+                >
+                  Sign UP
+                </Link>
+                <Link className="btn btn-outline-dark" to="/signIn">
+                  Login
+                </Link>
+              </div>
+            )) || (
+              <Link className="btn btn-outline-dark" to="/signOut">
+                Sign Out
+              </Link>
+            )}
           </div>
         </div>
       </div>

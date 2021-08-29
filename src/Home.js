@@ -3,37 +3,6 @@ import firebase from "./firebase";
 import React, { useState, useMemo } from "react";
 
 function App() {
-  const [value, setValue] = useState("");
-  console.log(value);
-
-  const handleClick = () => {
-    var recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
-    var number = "+919106670204";
-    firebase
-      .auth()
-      .signInWithPhoneNumber(number, recaptcha)
-      .then(function (e) {
-        console.error("no error");
-        var code = prompt("Enter the otp", "");
-
-        if (code === null) return;
-
-        e.confirm(code)
-          .then(function (result) {
-            console.log(result.user);
-
-            document.querySelector("label").textContent +=
-              result.user.phoneNumber + "Number verified";
-          })
-          .catch(function (error) {
-            console.error(error);
-            console.error("error");
-          });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
   return (
     <div
       style={{
