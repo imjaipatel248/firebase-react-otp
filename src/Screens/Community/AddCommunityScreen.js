@@ -9,6 +9,7 @@ const AddCommunityScreen = () => {
   const [name, setName] = useState("");
   const [community, setCommunity] = useState("");
   const [tags, setTags] = useState([]);
+  const [description, setDescription] = useState("");
   if (!isAuthenticated()) {
     return <Redirect to="/"></Redirect>;
   }
@@ -73,6 +74,21 @@ const AddCommunityScreen = () => {
                 placeholder: "Add Persona",
               }}
             />
+          </div>
+          <div class="form-group mt-2">
+            <label className="d-flex justify-content-start pb-1" for="purpose">
+              Description
+            </label>
+            <textarea
+              class="form-control"
+              id="purpose"
+              rows="3"
+              value={description}
+              placeholder="Enter Description"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            ></textarea>
           </div>
         </div>
         <button
