@@ -7,3 +7,9 @@ export const isAuthenticated = () => {
   }
   return false;
 };
+export const signOut = async (next) => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("userId");
+    next();
+  }
+};
