@@ -44,6 +44,9 @@
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 }
+.form-group .react-tagsinput-input {
+  width: auto;
+}
 .form-group .react-tagsinput-tag {
   background-color: rgb(230, 230, 230);
   border-radius: 2px;
@@ -56,4 +59,32 @@
   margin-bottom: 5px;
   margin-right: 5px;
   padding: 5px;
+}
+.circleLeft {
+  background-color: #fff;
+  border: 1px solid black;
+  height: 300px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  transform: translate(-35%, -35%);
+  width: 400px;
+  position: absolute;
+  z-index: -1000;
+  margin: -50;
+  padding: 0;
+}
+.circleRight {
+  background-color: #fff;
+  border: 1px solid black;
+  height: 200px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  transform: translate(450%, -150%);
+  width: 200px;
+  position: absolute;
+  z-index: -1000;
+  margin: -50;
+  padding: 0;
 }

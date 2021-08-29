@@ -60,12 +60,18 @@ const AddCommunityScreen = () => {
           </div>
           <div className="form-group mt-2" style={{ textAlign: "start" }}>
             <label className="d-flex justify-content-start pb-1" for="purpose">
-              Purpose
+              Persona
             </label>
             <TagsInput
               class="d-flex justify-content-start pb-1 form-control"
               value={tags}
               onChange={setTags}
+              maxTags={3}
+              onlyUnique={true}
+              inputProps={{
+                className: "react-tagsinput-input",
+                placeholder: "Add Persona",
+              }}
             />
           </div>
         </div>
