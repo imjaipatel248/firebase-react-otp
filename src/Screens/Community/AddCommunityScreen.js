@@ -1,12 +1,14 @@
+import "react-tagsinput/react-tagsinput.css";
 import React, { useState } from "react";
 import "react-phone-input-2/lib/material.css";
 import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../Services/auth/AuthService";
 import { addCommunity } from "../../Services/Community/CommunityService";
-
+import TagsInput from "react-tagsinput";
 const AddCommunityScreen = () => {
   const [name, setName] = useState("");
   const [community, setCommunity] = useState("");
+  const [tags, setTags] = useState([]);
   if (!isAuthenticated()) {
     return <Redirect to="/"></Redirect>;
   }
@@ -23,10 +25,10 @@ const AddCommunityScreen = () => {
       }}
       className="App pt-1 px-5  "
     >
-      <div className="p-5">
+      <div className="pb-5">
         <div className="pt-4">
           <div class="form-group">
-            <label className="d-flex justify-content-start pb-1" for="name">
+            <label className="d-flex justify-content-start mb-1" for="name">
               Name
             </label>
 
@@ -41,7 +43,7 @@ const AddCommunityScreen = () => {
               }}
             />
           </div>
-          <div class="form-group pt-2">
+          <div class="form-group mt-2">
             <label className="d-flex justify-content-start pb-1" for="purpose">
               Purpose
             </label>
@@ -55,6 +57,16 @@ const AddCommunityScreen = () => {
                 setName(e.target.value);
               }}
             ></textarea>
+          </div>
+          <div className="form-group mt-2" style={{ textAlign: "start" }}>
+            <label className="d-flex justify-content-start pb-1" for="purpose">
+              Purpose
+            </label>
+            <TagsInput
+              class="d-flex justify-content-start pb-1 form-control"
+              value={tags}
+              onChange={setTags}
+            />
           </div>
         </div>
         <button
