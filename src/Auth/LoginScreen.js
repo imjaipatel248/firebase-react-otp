@@ -37,6 +37,7 @@ const LoginScreen = () => {
           setVerifying(true);
         })
         .catch(function (error) {
+          console.log("process.env");
           if (error.code === "auth/invalid-phone-number") {
             setInValidCode("Invalid phone number");
           } else if (error.code === "auth/invalid-verification-code") {
