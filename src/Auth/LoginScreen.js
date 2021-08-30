@@ -1,9 +1,7 @@
 import firebase from "../firebase";
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 import "react-phone-input-2/lib/material.css";
 import PhoneInput from "react-phone-input-2";
-import startsWith from "lodash.startswith";
-import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../Services/auth/AuthService";
 import { RedirectTo } from "../Services/CommonService";
 
@@ -11,27 +9,22 @@ const LoginScreen = () => {
   const [value, setValue] = useState("");
   const [code, setCode] = useState("");
   const [redirect, setRedirect] = useState("");
-  const [isValid, setIsValidNumber] = useState(false);
+  const [inValidCode, setInValidCode] = useState("");
   const [confirm, setConfirm] = useState(null);
   const [verifying, setVerifying] = useState(false);
-  if (isAuthenticated()) {
-    setRedirect("/");
-  }
 
   if (redirect) {
     return RedirectTo(redirect);
   }
-  const isValidNumber = (inputNumber, country, countries) => {
-    const valid = countries.some((country) => {
-      return (
-        startsWith(inputNumber, country.dialCode) ||
-        startsWith(country.dialCode, inputNumber)
-      );
-    });
-    setIsValidNumber(valid);
-    return valid;
+  if (isAuthenticated()) {
+    return setRedirect("/");
+  }
+  const onChangePhoneNumber = (val) => {
+    setValue(val);
+    setInValidCode("");
   };
   const handleClick = async () => {
+    setInValidCode("");
     if (!verifying) {
       var recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
       await firebase
@@ -42,7 +35,13 @@ const LoginScreen = () => {
           setVerifying(true);
         })
         .catch(function (error) {
-          console.error(error);
+          if (error.code === "auth/invalid-phone-number") {
+            setInValidCode("Invalid phone number");
+          } else if (error.code == "auth/invalid-verification-code") {
+            setInValidCode("Invalid OTP.");
+          } else {
+            setInValidCode("Something went wrong.");
+          }
         });
     } else {
       confirm
@@ -50,11 +49,15 @@ const LoginScreen = () => {
         .then(function (result) {
           console.log(result.user);
           localStorage.setItem("userId", JSON.stringify(result.user.uid));
-          setRedirect("/community");
+          setRedirect("/show-community");
         })
         .catch(function (error) {
           console.error(error);
-          console.error("error");
+          if (error.code === "auth/invalid-verification-code") {
+            setInValidCode("Invalid OTP.");
+          } else {
+            setInValidCode("Something went wrong.");
+          }
         });
     }
   };
@@ -76,10 +79,8 @@ const LoginScreen = () => {
               country="in"
               placeholder="Enter phone number"
               value={value}
-              onChange={setValue}
-              isValid={(inputNumber, country, countries) =>
-                isValidNumber(inputNumber, country, countries)
-              }
+              onChange={onChangePhoneNumber}
+              isValid={inValidCode.length === 0}
             />
           )}
           {verifying && (
@@ -95,6 +96,7 @@ const LoginScreen = () => {
               />
             </div>
           )}
+          <label>{inValidCode}</label>
         </div>
         <button
           onClick={handleClick}

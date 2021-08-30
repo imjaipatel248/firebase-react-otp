@@ -1,5 +1,6 @@
+import firebase from "../../firebase";
 export const isAuthenticated = () => {
-  if (typeof window == "undefined") {
+  if (typeof window === "undefined") {
     return false;
   }
   if (localStorage.getItem("userId")) {
@@ -10,6 +11,11 @@ export const isAuthenticated = () => {
 export const signOut = async (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("userId");
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {})
+      .catch((error) => {});
     next();
   }
 };

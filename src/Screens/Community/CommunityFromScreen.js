@@ -1,7 +1,6 @@
 import "react-tagsinput/react-tagsinput.css";
 import React, { useEffect, useState } from "react";
 import "react-phone-input-2/lib/material.css";
-import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../Services/auth/AuthService";
 import {
   addCommunity,

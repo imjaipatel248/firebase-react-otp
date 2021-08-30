@@ -1,13 +1,9 @@
 import "react-tagsinput/react-tagsinput.css";
 import React, { useEffect, useState } from "react";
 import "react-phone-input-2/lib/material.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isAuthenticated } from "../../Services/auth/AuthService";
-import {
-  addCommunity,
-  getCommunity,
-} from "../../Services/Community/CommunityService";
-import TagsInput from "react-tagsinput";
+import { getCommunity } from "../../Services/Community/CommunityService";
 import { RedirectTo } from "../../Services/CommonService";
 
 const ShowCommunityScreen = () => {
@@ -32,7 +28,7 @@ const ShowCommunityScreen = () => {
       setBulletPoints(response.bulletPoints || []);
       setDescription(response.description);
     } else {
-      setRedirect("/purpose");
+      setRedirect("/community");
     }
     setLoading(false);
   }
@@ -43,12 +39,6 @@ const ShowCommunityScreen = () => {
     return RedirectTo(redirect);
   }
 
-  const handleClick = async () => {
-    setLoading(true);
-    await addCommunity(name, purpose, tags, bulletPoints, description);
-    setRedirect("show-purpose");
-    setLoading(false);
-  };
   return (
     <div
       style={{
