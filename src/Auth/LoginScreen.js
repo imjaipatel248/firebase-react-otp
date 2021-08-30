@@ -1,5 +1,5 @@
 import firebase from "../firebase";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "react-phone-input-2/lib/material.css";
 import PhoneInput from "react-phone-input-2";
 import { isAuthenticated } from "../Services/auth/AuthService";
@@ -12,9 +12,7 @@ const LoginScreen = () => {
   const [inValidCode, setInValidCode] = useState("");
   const [confirm, setConfirm] = useState(null);
   const [verifying, setVerifying] = useState(false);
-  useEffect(() => {
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha");
-  });
+
   if (redirect) {
     return RedirectTo(redirect);
   }
@@ -28,7 +26,7 @@ const LoginScreen = () => {
   const handleClick = async () => {
     setInValidCode("");
     if (!verifying) {
-      var recaptcha = window.recaptchaVerifier;
+      var recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
       await firebase
         .auth()
         .signInWithPhoneNumber("+" + value, recaptcha)
@@ -37,7 +35,6 @@ const LoginScreen = () => {
           setVerifying(true);
         })
         .catch(function (error) {
-          console.log("process.env");
           if (error.code === "auth/invalid-phone-number") {
             setInValidCode("Invalid phone number");
           } else if (error.code === "auth/invalid-verification-code") {
