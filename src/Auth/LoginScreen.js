@@ -5,15 +5,21 @@ import PhoneInput from "react-phone-input-2";
 import startsWith from "lodash.startswith";
 import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../Services/auth/AuthService";
+import { RedirectTo } from "../Services/CommonService";
 
 const LoginScreen = () => {
   const [value, setValue] = useState("");
   const [code, setCode] = useState("");
+  const [redirect, setRedirect] = useState("");
   const [isValid, setIsValidNumber] = useState(false);
   const [confirm, setConfirm] = useState(null);
   const [verifying, setVerifying] = useState(false);
   if (isAuthenticated()) {
-    return <Redirect to="/"></Redirect>;
+    setRedirect("/");
+  }
+
+  if (redirect) {
+    return RedirectTo(redirect);
   }
   const isValidNumber = (inputNumber, country, countries) => {
     const valid = countries.some((country) => {
@@ -42,12 +48,9 @@ const LoginScreen = () => {
       confirm
         .confirm(code)
         .then(function (result) {
-          alert("verifying");
           console.log(result.user);
           localStorage.setItem("userId", JSON.stringify(result.user.uid));
-
-          document.querySelector("label").textContent +=
-            result.user.phoneNumber + "Number verified";
+          setRedirect("/community");
         })
         .catch(function (error) {
           console.error(error);

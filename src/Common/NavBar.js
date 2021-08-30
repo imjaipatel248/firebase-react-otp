@@ -12,7 +12,7 @@ const NavBar = ({ history }) => {
   return (
     <div style={{ backgroundColor: "#faf8f3" }} className="pt-3 px-3 mt-5 ">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container-fluid px-5">
+        <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             befriend
           </Link>
@@ -46,11 +46,11 @@ const NavBar = ({ history }) => {
               <li className="nav-item mx-4">
                 <Link
                   className={
-                    isActive(history, "/community")
+                    isActive(history, "/show-community")
                       ? "nav-link active"
                       : "nav-link"
                   }
-                  to="/community"
+                  to="/show-community"
                 >
                   Community
                 </Link>
