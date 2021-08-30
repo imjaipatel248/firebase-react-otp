@@ -1,5 +1,5 @@
 import firebase from "../firebase";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-phone-input-2/lib/material.css";
 import PhoneInput from "react-phone-input-2";
 import { isAuthenticated } from "../Services/auth/AuthService";
@@ -12,7 +12,9 @@ const LoginScreen = () => {
   const [inValidCode, setInValidCode] = useState("");
   const [confirm, setConfirm] = useState(null);
   const [verifying, setVerifying] = useState(false);
-
+  useEffect(() => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha");
+  });
   if (redirect) {
     return RedirectTo(redirect);
   }
@@ -26,7 +28,7 @@ const LoginScreen = () => {
   const handleClick = async () => {
     setInValidCode("");
     if (!verifying) {
-      var recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
+      var recaptcha = window.recaptchaVerifier;
       await firebase
         .auth()
         .signInWithPhoneNumber("+" + value, recaptcha)
@@ -37,7 +39,7 @@ const LoginScreen = () => {
         .catch(function (error) {
           if (error.code === "auth/invalid-phone-number") {
             setInValidCode("Invalid phone number");
-          } else if (error.code == "auth/invalid-verification-code") {
+          } else if (error.code === "auth/invalid-verification-code") {
             setInValidCode("Invalid OTP.");
           } else {
             setInValidCode("Something went wrong.");

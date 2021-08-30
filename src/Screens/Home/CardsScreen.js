@@ -4,17 +4,20 @@ import "react-phone-input-2/lib/material.css";
 const cardsJson = [
   {
     title: "This community is fun",
-    subTitle: "Amet minim molit",
+    subTitle:
+      "A real friend is one who walks in when the rest of the world walks out.",
     imageSource: "assets/img/user1.png",
   },
   {
-    title: "This community is fun",
-    subTitle: "Amet minim molit",
+    title: "It's prrtty easy",
+    subTitle:
+      "“Lots of people want to ride with you in the limo, but what you want is someone who will take the bus with you when the limo breaks down.",
     imageSource: "assets/img/user2.png",
   },
   {
-    title: "This community is fun",
-    subTitle: "Amet minim molit",
+    title: "Be friend with others",
+    subTitle:
+      "If you live to be a hundred, I hope I live to be a hundred minus one day, so I never have to live without you.",
     imageSource: "assets/img/user3.png",
   },
 ];
