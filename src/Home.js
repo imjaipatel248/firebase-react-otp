@@ -4,6 +4,7 @@ import logo from "./Friends.png";
 import CardsScreen from "./Screens/Home/CardsScreen";
 
 function App() {
+  console.log(process.env);
   return (
     <div>
       <div
