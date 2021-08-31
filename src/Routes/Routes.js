@@ -1,19 +1,14 @@
 import { Route, Switch } from "react-router-dom";
-import Home from "../../src//Home";
 import LoginScreen from "../Auth/LoginScreen";
-// import SignUp from "../../src/user/SignUp";
-// import SignIn from "../../src/user/SignIn";
 import NavBar from "../Common/NavBar";
 import CommunityFromScreen from "../Screens/Community/CommunityFromScreen";
 import ShowCommunityScreen from "../Screens/Community/ShowCommunityScreen";
-// import ProfileScreen from "../user/ProfileScreen";
-// import UsersScreen from "../user/UsersScreen";
-// import EditScreen from "../user/EditScreen";
+import HomeScreen from "../Screens/Home/HomeScreen";
 const Routes = () => (
   <div>
     <NavBar></NavBar>
     <Switch>
-      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/" component={HomeScreen}></Route>
       <Route exact path="/signIn" component={LoginScreen}></Route>
       <Route exact path="/community" component={CommunityFromScreen}></Route>
       <Route

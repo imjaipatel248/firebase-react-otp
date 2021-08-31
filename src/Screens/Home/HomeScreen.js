@@ -1,9 +1,8 @@
-import "./App.css";
+import "../../App.css";
 import React from "react";
-import logo from "./Friends.png";
-import CardsScreen from "./Screens/Home/CardsScreen";
+import CardsScreen from "./CardsScreen";
 
-function App() {
+const HomeScreen = () => {
   console.log(process.env);
   return (
     <div>
@@ -24,15 +23,15 @@ function App() {
             We are happy to help you find your friends,no matter what you are we
             always happy to welcome you. We just be friends here.
           </p>
-          <button type="button" class="btn btn-dark mt-3">
+          <button type="button" className="btn btn-dark mt-3">
             Join us now
           </button>
         </div>
-        <img src={logo} className="friend-image" alt="logo" />
+        <img src="assets/img/Friends.png" className="friend-image" alt="logo" />
       </div>
       <CardsScreen />
     </div>
   );
-}
+};
 
-export default App;
+export default HomeScreen;

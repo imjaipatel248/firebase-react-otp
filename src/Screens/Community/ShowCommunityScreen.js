@@ -49,8 +49,8 @@ const ShowCommunityScreen = () => {
       className="App pt-1 px-5  "
     >
       {(isLoading && (
-        <div class="spinner-border text-primary m-5" role="status">
-          <span class="sr-only"></span>
+        <div className="spinner-border text-primary m-5" role="status">
+          <span className="sr-only"></span>
         </div>
       )) || (
         <div className="pb-5">
@@ -58,8 +58,8 @@ const ShowCommunityScreen = () => {
             Edit
           </Link>
           <div className="pt-4">
-            <div class="table table-responsive-xl px-5 text-align-start">
-              <table class="table">
+            <div className="table table-responsive-xl px-5 text-align-start">
+              <table className="table">
                 <tbody>
                   <tr>
                     <td>Name</td>

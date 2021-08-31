@@ -2,7 +2,10 @@ import firebase from "../firebase";
 import React, { useState } from "react";
 import "react-phone-input-2/lib/material.css";
 import PhoneInput from "react-phone-input-2";
-import { isAuthenticated } from "../Services/auth/AuthService";
+import {
+  isAuthenticated,
+  signInWithPhoneNumber,
+} from "../Services/auth/AuthService";
 import { RedirectTo } from "../Services/CommonService";
 
 const LoginScreen = () => {
@@ -27,22 +30,13 @@ const LoginScreen = () => {
     setInValidCode("");
     if (!verifying) {
       var recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha");
-      await firebase
-        .auth()
-        .signInWithPhoneNumber("+" + value, recaptcha)
-        .then((confirmResult) => {
-          setConfirm(confirmResult);
-          setVerifying(true);
-        })
-        .catch(function (error) {
-          if (error.code === "auth/invalid-phone-number") {
-            setInValidCode("Invalid phone number");
-          } else if (error.code === "auth/invalid-verification-code") {
-            setInValidCode("Invalid OTP.");
-          } else {
-            setInValidCode("Something went wrong.");
-          }
-        });
+      await signInWithPhoneNumber(
+        value,
+        recaptcha,
+        setConfirm,
+        setInValidCode,
+        setVerifying
+      );
     } else {
       confirm
         .confirm(code)
@@ -53,8 +47,11 @@ const LoginScreen = () => {
         })
         .catch(function (error) {
           console.error(error);
+          console.error("error");
           if (error.code === "auth/invalid-verification-code") {
             setInValidCode("Invalid OTP.");
+          } else if (error.code === "auth/quota-exceeded") {
+            setInValidCode("Daily quota exceeded.");
           } else {
             setInValidCode("Something went wrong.");
           }
@@ -84,10 +81,10 @@ const LoginScreen = () => {
             />
           )}
           {verifying && (
-            <div class="form-group mx-sm-3">
+            <div className="form-group mx-sm-3">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 value={code}
                 placeholder="OTP"
                 onChange={(e) => {

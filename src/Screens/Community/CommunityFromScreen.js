@@ -66,13 +66,13 @@ const CommunityFromScreen = () => {
       className="App pt-1 px-5  "
     >
       {(isLoading && (
-        <div class="spinner-border text-primary m-5" role="status">
-          <span class="sr-only"></span>
+        <div className="spinner-border text-primary m-5" role="status">
+          <span className="sr-only"></span>
         </div>
       )) || (
         <div className="pb-5">
           <div className="pt-4">
-            <div class="form-group">
+            <div className="form-group">
               <label
                 className="d-flex justify-content-start mb-1"
                 htmlFor="name"
@@ -83,15 +83,15 @@ const CommunityFromScreen = () => {
               <input
                 id="name"
                 type="text"
-                class="form-control"
-                value={community}
+                className="form-control"
+                value={name}
                 placeholder="Enter Name"
                 onChange={(e) => {
                   setCommunity(e.target.value);
                 }}
               />
             </div>
-            <div class="form-group mt-2">
+            <div className="form-group mt-2">
               <label
                 className="d-flex justify-content-start pb-1"
                 htmlFor="purpose"
@@ -99,10 +99,10 @@ const CommunityFromScreen = () => {
                 Purpose
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="purpose"
                 rows="3"
-                value={name}
+                value={community}
                 placeholder="Enter Purpose"
                 onChange={(e) => {
                   setName(e.target.value);
@@ -117,7 +117,7 @@ const CommunityFromScreen = () => {
                 Persona
               </label>
               <TagsInput
-                class="d-flex justify-content-start pb-1 form-control"
+                className="d-flex justify-content-start pb-1 form-control"
                 value={tags}
                 onChange={setTags}
                 maxTags={3}
@@ -128,7 +128,7 @@ const CommunityFromScreen = () => {
                 }}
               />
             </div>
-            <div class="form-group mt-2">
+            <div className="form-group mt-2">
               <label
                 className="d-flex justify-content-start pb-1"
                 htmlFor="purpose"
@@ -136,7 +136,7 @@ const CommunityFromScreen = () => {
                 Description
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="purpose"
                 rows="3"
                 value={description}
@@ -154,7 +154,7 @@ const CommunityFromScreen = () => {
                 Rules
               </label>
               <TagsInput
-                class="d-flex justify-content-start pb-1 form-control"
+                className="d-flex justify-content-start pb-1 form-control"
                 value={bulletPoints}
                 onChange={setBulletPoints}
                 onlyUnique={true}

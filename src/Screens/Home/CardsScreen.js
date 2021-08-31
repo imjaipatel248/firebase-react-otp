@@ -27,11 +27,11 @@ const CardsScreen = () => {
     <div className="App mb-5 p-5 row">
       {cardsJson.map((card, i) => (
         <div className="col-sm-4 mt-2 d-flex justify-content-center">
-          <div class="card" style={{ width: "18rem" }}>
-            <img class="card-img-top" src={card.imageSource} alt="" />
-            <div class="card-body">
-              <h5 class="card-title">{card.title}</h5>
-              <p class="card-text">{card.subTitle}</p>
+          <div className="card" style={{ width: "18rem" }}>
+            <img className="card-img-top" src={card.imageSource} alt="" />
+            <div className="card-body">
+              <h5 className="card-title">{card.title}</h5>
+              <p className="card-text">{card.subTitle}</p>
             </div>
           </div>
         </div>
